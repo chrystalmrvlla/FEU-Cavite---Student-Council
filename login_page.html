@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
+    
+    <!--ICONS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        
+    <!--ICON ON TITLE BAR-->
+	<link rel="shortcut icon" href="icon-modified.png" type="image/x-icon"/>
+<!--
+    UNIVERSAL COLOR CODE:
+
+#048249 - Green
+#FBBD11 - Yellow
+#005c40 - darker green(for borders or outline)
+-->
+    <style>
+
+    .pagination {
+        align-items: center;
+    }
+    #navbarSupportedContent{
+        font-size: medium;
+    }
+    .navbar{
+        min-height: 60px;
+        height: 60px; 
+    } 
+    @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400);
+
+
+    body{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight:300;
+    background-color:lightblue;
+    color:#FFF;
+    }
+    section{
+    text-align:center;
+    }
+    .card-button{
+      align-items: center;
+      height: max-content;
+      width: max-content;
+    }
+
+    .ftrlinks{
+            color: #22272C;
+        }
+        .ftrlinks:hover{
+            color: gray;
+        }
+        .dot {
+            height: 60px;
+            width: 60px;
+            background-color: #004AAD;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .dot1 {
+            height: 60px;
+            width: 60px;
+            background-color: #FFDE59;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .dot2 {
+            height: 60px;
+            width: 60px;
+            background-color: #FF1616;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .dot3 {
+            height: 60px;
+            width: 60px;
+            background-color: white;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .btncircle{
+            height: 60px;
+            width: 60px;
+            background-color: #F8F9FA;
+            border-radius: 50%;
+        }
+        .col{
+            border-color: #22272C;
+        }
+    .footer #button{
+    	width:35px;
+    	height:35px;
+    	border: #727172 12px solid;
+    	border-radius:35px;
+    	margin:0 auto;
+    	position:relative;
+    	-webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        -o-transition: all 1s ease;
+        -ms-transition: all 1s ease;
+        transition: all 1s ease;
+    }
+    .footer #button:hover{
+    	width:35px;
+    	height:35px;
+    	border: #3A3A3A 12px solid;
+    	-webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        -o-transition: all 1s ease;
+        -ms-transition: all 1s ease;
+        transition: all 1s ease;
+    	position:relative;
+    }
+    .footer {
+    	bottom:0;
+    	left:0;
+    	position:fixed;
+        width: 100%;
+        height: 2em;
+        overflow:hidden;
+        margin:0 auto;
+    	-webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        -o-transition: all 1s ease;
+        -ms-transition: all 1s ease;
+        transition: all 1s ease;
+    	z-index:999;
+    }
+    .footer:hover {
+    	-webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        -o-transition: all 1s ease;
+        -ms-transition: all 1s ease;
+        transition: all 1s ease;
+    	height: 11em;
+    }
+    .footer #container{
+    	margin-top:5px;
+    	width:100%;
+    height:100%;
+      position:relative;
+      top:0;
+      left:0;
+    	background: #048249;
+    }
+    .footer #cont{
+      position:relative;
+      top:-45px;
+      right:190px;
+    	width:150px;
+    	height:auto;
+    	margin:0 auto;
+    }
+    .footer_center{
+    	width:500px;
+    	float:left;
+      text-align:center;
+    }
+    .footer h3{
+    	font-family: 'Helvetica';
+    	font-size: 30px;
+    	font-weight: 100;
+    	margin-top:70px;
+    	margin-left:40px;
+    }
+    </style>
+  </head>
+
+<body class="bg-light">
+
+<!--start of navbar-->
+<nav class="navbar navbar-expand-lg bg-success">
+  <div class="container-fluid">
+    <a class="navbar-brand text-light" href="index.html">
+      <img src="logo.png" width="30px" height="50px">
+      FEU Student Council
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active text-light" aria-current="page" href="representative.html">Representatives</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="calendar_of_events.html">Calendar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="upload_download.html">Upload/Download</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">Search</button>
+      </form>
+      <div class="ms-2">
+        <a href="login_page.html"><button type="submit" class="btn btn-outline-warning">Login</button></a>
+    </div>
+    </div>
+  </div>
+</nav>
+<!--end of navbar-->
+<br><br><br>
+  <h1 class="display-1 text-dark mt-3 text-center">Student Login</h1>
+    <!--Start of Login Page-->
+        <div class="container-fluid text-dark">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col col-lg-6">
+                    <img src="logo.png" class="w-100">
+                </div>
+                <div class="col col-lg-6 col-xl-4">
+                    <form>
+                        <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                            <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+                                <button type="button" class="btn btn-success btncircle">
+                                    <i class="bi bi-facebook" style="font-size: 20pt; color: blue;"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-outline-warning btncircle">
+                                    <i class="bi bi-google" style="font-size: 20pt; color:red;"></i>
+                                </button>
+                        </div>
+
+                        <div class="divider d-flex justify-content-center my-4">
+                            <p class="text-center fw-bold mx mb-0">Or</p>
+                        </div>
+
+                        <!-- Email input -->
+                        <div class="form-floating mb-4">
+                            <input type="email" id="emailSignIn" class="form-control form-control-lg rounded-0" placeholder="Email Address">
+                            <label for="emailSignIn">Email Address</label>
+                        </div>
+                        <!-- Password input -->
+                        <div class="form-floating mb-4">
+                            <input type="password" id="passwordSignIn" class="form-control form-control-lg rounded-0" placeholder="Password">
+                            <label for="passwordSignIn">Password</label>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                        <!-- Checkbox -->
+                        <div class="form-check mb-0">
+                            <input class="form-check-input me-2" type="checkbox" value="rememberMe" id="rememberMe" />
+                            <label class="form-check-label" for="rememberMe">
+                                Remember me
+                            </label>
+                        </div>
+                           <a href="" class="text-muted">Forgot password?</a>
+                        </div>
+                        
+                        <div class="text-center text-lg-start mt-4 pt-2">
+                            <button type="button" class="btn btn-lg btn-outline-dark" style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button> 
+                            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? 
+                                <a href="signup_page.html" style="color: #048249">Register to Join us!</a></p>
+                        </div>    
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    <br><br><br><br>
+    <!--End of Login Page-->
+
+      <!--Start of footer-->
+
+      <div class="footer">
+        <div id="button"></div>
+      <div id="container">
+      <div id="cont">
+      <div class="footer_center">
+             <h3>Contact Us!</h3>
+      </div>
+      </div>
+      </div>
+      </div>
+    <!--End of footer-->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calendar of Events</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <style>
+        .pagination {
+            align-items: center;
+        }
+
+        #navbarSupportedContent {
+            font-size: medium;
+        }
+
+        .navbar {
+            min-height: 60px;
+            height: 60px;
+        }
+
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400);
+
+        body {
+            background: #f5f7fa;
+            padding: 0px 0px 40px 0px;
+            box-sizing: border-box;
+            font-family: Montserrat, "sans-serif";
+            color: #51565d;
+        }
+
+        .calendar {
+            display: grid;
+            width: 100%;
+            grid-template-columns: repeat(7, minmax(120px, 1fr));
+            grid-template-rows: 50px;
+            grid-auto-rows: 120px;
+            overflow: auto;
+        }
+
+        .calendar-container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background: #fff;
+            max-width: 1200px;
+            margin-bottom: 30px;
+        }
+
+        .calendar-header {
+            text-align: center;
+            padding: 20px 0;
+            background: linear-gradient(to bottom, #fafbfd 0%, rgba(255, 255, 255, 0) 100%);
+            border-bottom: 1px solid rgba(166, 168, 179, 0.12);
+        }
+
+        .calendar-header h1 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .calendar-header p {
+            margin: 5px 0 0 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(81, 86, 93, 0.4);
+        }
+
+        .calendar-header button {
+            background: 0;
+            border: 0;
+            padding: 0;
+            color: rgba(81, 86, 93, 0.7);
+            cursor: pointer;
+            outline: 0;
+        }
+
+        .day {
+            border-bottom: 1px solid rgba(166, 168, 179, 0.12);
+            border-right: 1px solid rgba(166, 168, 179, 0.12);
+            text-align: right;
+            padding: 14px 20px;
+            letter-spacing: 1px;
+            font-size: 12px;
+            box-sizing: border-box;
+            color: #98a0a6;
+            position: relative;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .day:nth-of-type(7n + 7) {
+            border-right: 0;
+        }
+
+        .day:nth-of-type(n + 1):nth-of-type(-n + 7) {
+            grid-row: 2;
+        }
+
+        .day:nth-of-type(n + 8):nth-of-type(-n + 14) {
+            grid-row: 3;
+        }
+
+        .day:nth-of-type(n + 15):nth-of-type(-n + 21) {
+            grid-row: 4;
+        }
+
+        .day:nth-of-type(n + 22):nth-of-type(-n + 28) {
+            grid-row: 5;
+        }
+
+        .day:nth-of-type(n + 29):nth-of-type(-n + 35) {
+            grid-row: 6;
+        }
+
+        .day:nth-of-type(7n + 1) {
+            grid-column: 1/1;
+        }
+
+        .day:nth-of-type(7n + 2) {
+            grid-column: 2/2;
+        }
+
+        .day:nth-of-type(7n + 3) {
+            grid-column: 3/3;
+        }
+
+        .day:nth-of-type(7n + 4) {
+            grid-column: 4/4;
+        }
+
+        .day:nth-of-type(7n + 5) {
+            grid-column: 5/5;
+        }
+
+        .day:nth-of-type(7n + 6) {
+            grid-column: 6/6;
+        }
+
+        .day:nth-of-type(7n + 7) {
+            grid-column: 7/7;
+        }
+
+        .day-name {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #99a1a7;
+            text-align: center;
+            border-bottom: 1px solid rgba(166, 168, 179, 0.12);
+            line-height: 50px;
+            font-weight: 500;
+        }
+
+        .day--disabled {
+            color: rgba(152, 160, 166, 0.6);
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+            cursor: not-allowed;
+        }
+
+        .task {
+            border-left-width: 3px;
+            padding: 8px 12px;
+            margin: 0px;
+            border-left-style: solid;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .task--warning {
+            border-left-color: #fdb44d;
+            grid-column: 4/span 3;
+            grid-row: 3;
+            background: #fef0db;
+            align-self: center;
+            color: #fc9b10;
+            margin-top: -5px;
+        }
+
+        .task--danger {
+            border-left-color: #048249;
+            grid-column: 2/span 3;
+            grid-row: 3;
+            margin-top: 0px;
+            background: rgba(4, 130, 73, 0.5);
+            align-self: end;
+            color: #024a2a;
+        }
+
+        .task--info {
+            border-left-color: #fdb44d;
+            grid-column: 6/span 2;
+            grid-row: 5;
+            margin-top: 0px;
+            background: #fef0db;
+            align-self: end;
+            color: #fdb44d;
+        }
+
+        .task--primary {
+            background: #024a2a;
+            border: 0;
+            border-radius: 4px;
+            grid-column: 3/span 3;
+            grid-row: 4;
+            align-self: end;
+            color: #fff;
+            box-shadow: 0 10px 14px rgba(4, 130, 73, 0.5);
+        }
+
+        .task__detail {
+            position: absolute;
+            left: 0;
+            top: calc(100% + 10px);
+            background: #fff;
+            border: 1px solid rgba(166, 168, 179, 0.2);
+            color: #000;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            z-index: 2;
+        }
+
+        .task__detail:after,
+        .task__detail:before {
+            bottom: 100%;
+            left: 30%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .task__detail:before {
+            border-bottom-color: rgba(166, 168, 179, 0.2);
+            border-width: 8px;
+            margin-left: -8px;
+        }
+
+        .task__detail:after {
+            border-bottom-color: #fff;
+            border-width: 6px;
+            margin-left: -6px;
+        }
+
+        .task__detail h2 {
+            font-size: 15px;
+            margin: 0;
+            color: #51565d;
+        }
+
+        .task__detail p {
+            margin-top: 4px;
+            font-size: 12px;
+            margin-bottom: 0;
+            font-weight: 500;
+            color: rgba(81, 86, 93, 0.7);
+
+        }
+
+
+        .footer #button {
+            width: 35px;
+            height: 35px;
+            border: #727172 12px solid;
+            border-radius: 35px;
+            margin: 0 auto;
+            position: relative;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        .footer #button:hover {
+            width: 35px;
+            height: 35px;
+            border: #3A3A3A 12px solid;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            transition: all 1s ease;
+            position: relative;
+        }
+
+        .footer {
+            bottom: 0;
+            left: 0;
+            position: fixed;
+            width: 100%;
+            height: 2em;
+            overflow: hidden;
+            margin: 0 auto;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            transition: all 1s ease;
+            z-index: 999;
+        }
+
+        .footer:hover {
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            transition: all 1s ease;
+            height: 11em;
+        }
+
+        .footer #container {
+            margin-top: 5px;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            background: #048249;
+        }
+
+        .footer #cont {
+            position: relative;
+            top: -45px;
+            right: 190px;
+            width: 150px;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .footer_center {
+            width: 500px;
+            float: left;
+            text-align: center;
+        }
+
+        .footer h3 {
+            font-family: 'Helvetica';
+            font-size: 30px;
+            font-weight: 100;
+            margin-top: 70px;
+            margin-left: 40px;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+<!--start of navbar-->
+<nav class="navbar navbar-expand-lg bg-success">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light" href="index.html">
+        <img src="logo.png" width="30px" height="50px">
+        FEU Student Council
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="representative.html">Representatives</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="calendar_of_events.html">Calendar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="upload_download.html">Upload/Download</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+        <div class="ms-2">
+          <a href="login_page.html"><button type="submit" class="btn btn-outline-warning">Login</button></a>
+      </div>
+      </div>
+    </div>
+  </nav>
+<!--end of navbar-->
+    <br><br><br><br>
+
+    <!--start of calendar-->
+    <div class="calendar-container container-expand-lg">
+        <div class="calendar-header">
+            <h1>
+                October
+                <button>▾</button>
+            </h1>
+            <p>2022</p>
+        </div>
+        <div class="calendar">
+            <span class="day-name">Sun</span>
+            <span class="day-name">Mon</span>
+            <span class="day-name">Tues</span>
+            <span class="day-name">Wed</span>
+            <span class="day-name">Thurs</span>
+            <span class="day-name">Fri</span>
+            <span class="day-name">Sat</span>
+            <div class="day day--disabled">25</div>
+            <div class="day day--disabled">26</div>
+            <div class="day day--disabled">27</div>
+            <div class="day day--disabled">28</div>
+            <div class="day day--disabled">29</div>
+            <div class="day day--disabled">30</div>
+            <div class="day">1</div>
+            <div class="day">2</div>
+            <div class="day">3</div>
+            <div class="day">4</div>
+            <div class="day">5</div>
+            <div class="day">6</div>
+            <div class="day">7</div>
+            <div class="day">8</div>
+            <div class="day">9</div>
+            <div class="day">10</div>
+            <div class="day">11</div>
+            <div class="day">12</div>
+            <div class="day">13</div>
+            <div class="day">14</div>
+            <div class="day">15</div>
+            <div class="day">16</div>
+            <div class="day">17</div>
+            <div class="day">18</div>
+            <div class="day">19</div>
+            <div class="day">20</div>
+            <div class="day">21</div>
+            <div class="day">22</div>
+            <div class="day">23</div>
+            <div class="day">24</div>
+            <div class="day">25</div>
+            <div class="day">26</div>
+            <div class="day">27</div>
+            <div class="day">28</div>
+            <div class="day">29</div>
+            <div class="day">30</div>
+            <div class="day">31</div>
+            <div class="day day--disabled">1</div>
+            <div class="day day--disabled">2</div>
+            <section class="task task--warning">October Sports Fest</section>
+            <section class="task task--danger">Preparation for November</section>
+            <section class="task task--primary">Project 1-A
+                <div class="task__detail">
+                    <h2>Deadline</h2>
+                    <p>October 5</p>
+                </div>
+            </section>
+            <section class="task task--info">Project 2</section>
+        </div>
+    </div>
+    <!--end of calendar-->
+
+    <div class="container">
+        <div class="row">
+            <!--Start of Row-->
+            <div class="col">
+                <div class="row">
+                    <!--start of Accordion-->
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    October Sports Fest
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <p>
+                                        This document is team-building activity using sports as a platform;
+                                        specifically, using the Traditional Filipino Street Games as activities. The
+                                        program is organized by Magna Kultura Foundation, the National Organizer of the
+                                        Filipino Games in the Philippines.
+                                    </p>
+
+                                    <p>
+                                        The Palarong Pinoy events are conducted in a Mini-Olympics sports format with
+                                        referees, marshals, and a tournament system that organizes adults into teams
+                                        with Team Captains and Coaches. Adults are immersed into fun games like:
+                                        Patintero, Tumbang Preso, Piko, Luksong Lubid, Luksong Tinik, Chinese Garter,
+                                        Sipang Bilangan, and various Pinoy relay race games.
+                                    </p>
+
+                                    <p>
+                                        Larong Pinoy Games are equally fun and challenging. It's an unforgettable
+                                        experience that each and everyone will cherish, as it will bring out the child
+                                        in every participant. It will bring back the good 'ol days when they all use to
+                                        play it.
+                                    </p>
+                                </div>
+                            </div>
+                            <!--End of First Accordion-->
+                            <!--Second Accordion-->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Tam's Night
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p>
+                                            A party like you've never seen before!
+                                        </p>
+
+                                        <p>
+                                            Right after midterms all we want to do is unwind and enjoy our free time
+                                            before we head on to the Finals where it would be twice as hard and twice as
+                                            challenging for us students
+                                        </p>
+
+                                        <p>
+                                            Tams night is a series of events and stuff that would help the students of
+                                            FEU Cavite to be more and more engaged in school and connect with other
+                                            students outside their courses!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End of Second Accordion-->
+                            <!--Third Accordion-->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        Project 1-A
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p>
+                                            Project 1-A is an individual project of Kodego where the students are
+                                            allowed to make anything they wish as long as they are showing the key
+                                            features of what was thought to them. This gives the student freedom and tap
+                                            on their imagination in a way that they can do it on their own already
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End of Third Accordion-->
+                            <!--Fourth Accordion-->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour">
+                                        Preparation for November
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p>
+                                            In November, we are going to have our Capstone already and all of the WD20P
+                                            are looking forward to it because we know it will be one of the needed steps
+                                            in order to break into tech.
+                                        </p>
+                                        <p>
+                                            This early, we need to prepare about how we are going to amaze the people
+                                            about our learnings in Kodego!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End of Fourth Accordion-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br><br><br><br><br><br>
+            <!--Start of footer-->
+
+            <div class="footer">
+                <div id="button"></div>
+                <div id="container">
+                    <div id="cont">
+                        <div class="footer_center">
+                            <h3 class="text-light">Contact Us!</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End of footer-->
+
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+                crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Council</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
+    
+    <!--ICONS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        
+    <!--ICON ON TITLE BAR-->
+	<link rel="shortcut icon" href="icon-modified.png" type="image/x-icon"/>
+<!--
+    UNIVERSAL COLOR CODE:
+
+#048249 - Green
+#FBBD11 - Yellow
+#005c40 - darker green(for borders or outline)
+-->
+    <style>
+
+    .pagination {
+        align-items: center;
+    }
+    #navbarSupportedContent{
+        font-size: medium;
+    }
+    .navbar{
+        margin-top: 50px;
+        min-height: 100px;
+        height: 200px; 
+    } 
+    @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400);
+
+
+    body{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight:300;
+    background-color:lightblue;
+    color:#FFF;
+    }
+    section{
+    text-align:center;
+    }
+
+    .footer #button{
+    	width:35px;
+    	height:35px;
+    	border: #727172 12px solid;
+    	border-radius:35px;
+    	margin:0 auto;
+    	position:relative;
+    	-webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        -o-transition: all 1s ease;
+        -ms-transition: all 1s ease;
+        transition: all 1s ease;
+    }
+    .footer #button:hover{
+    	width:35px;
+    	height:35px;
+    	border: #3A3A3A 12px solid;
+    	-webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        -o-transition: all 1s ease;
+        -ms-transition: all 1s ease;
+        transition: all 1s ease;
+    	position:relative;
+    }
+    .footer {
+    	bottom:0;
+    	left:0;
+    	position:fixed;
+        width: 100%;
+        height: 2em;
+        overflow:hidden;
+        margin:0 auto;
+    	-webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        -o-transition: all 1s ease;
+        -ms-transition: all 1s ease;
+        transition: all 1s ease;
+    	z-index:999;
+    }
+    .footer:hover {
+    	-webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        -o-transition: all 1s ease;
+        -ms-transition: all 1s ease;
+        transition: all 1s ease;
+    	height: 11em;
+    }
+    .footer #container{
+    	margin-top:5px;
+    	width:100%;
+    height:100%;
+      position:relative;
+      top:0;
+      left:0;
+    	background: #048249;
+    }
+    .footer #cont{
+      position:relative;
+      top:-45px;
+      right:190px;
+    	width:150px;
+    	height:auto;
+    	margin:0 auto;
+    }
+    .footer_center{
+    	width:500px;
+    	float:left;
+      text-align:center;
+    }
+    .footer h3{
+    	font-family: 'Helvetica';
+    	font-size: 30px;
+    	font-weight: 100;
+    	margin-top:70px;
+    	margin-left:40px;
+    }
+    </style>
+  </head>
+
+  <!--start of sign up page-->
+  <body class="bg-light">
+    
+    <div class="container-fluid bg-light text-dark">
+        <div class="navbar navbar-expand-lg justify-content-center">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.png" style="width: 200px;">
+            </a>
+        </div>
+    </div>
+
+    <section class="mt-3">
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-9">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4">
+                    <form>
+                        <!--Name Input-->
+                        <div class="mb-3">
+                            <label for="nameSignup" class="form-label text-dark">Your Name</label>
+                            <input type="text" class="form-control" id="nameSignup" placeholder="Full Name">
+                        </div>
+
+                        <!-- Email Input -->
+                        <div class="mb-3">
+                            <label for="emailSignup" class="form-label text-dark">Email address</label>
+                            <input type="email" class="form-control" id="emailSignup" placeholder="studentnumber@feucavite.edu.ph">
+                        </div>
+
+                        <!-- Password Input -->
+                        <div class="mb-3">
+                            <label for="passwordSignup" class="form-label text-dark">Password</label>
+                            <input type="password" class="form-control" id="passwordSignup" placeholder="At least 6 characters" pattern=".{5,10}" required >
+                            <p><i class="bi bi-info-square fw-normal text-muted">
+                                Passwords must be at least 6 characters.</i></p>
+                        </div>
+
+                        <!-- Re-enter Password Input -->
+                        <div class="mb-3">
+                            <label for="repasswordSignup" class="form-label text-dark">Password</label>
+                            <input type="password" class="form-control" id="repasswordSignup" placeholder="Re-enter password" pattern=".{5,10}" required>
+                                                    <!--Button-->
+                        <div class="justify-content-center mt-4 pt-2 mb-5 d-flex text-dark">
+                            <button type="submit" 
+                            class="btn btn-outline-success justify-content-center align-items-center w-100"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalOne">
+                            Create account
+                            </button>
+                            <div class="modal fade" id="modalOne" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalTitle"> Creating Account</h5>
+                                            <button class="btn-close"
+                                                    type="button"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="close">
+                                            </button>
+                                        </div>
+                                         <!--end of header-->
+                                         <div class="modal-body">
+                                            <p class="fw-bold">Are you sure the information you entered are correct? </p>
+                                            <p class="fw-lighter">(take note that your student email should match the information that we have on file in order to create an account for you)</p>
+                                         </div>
+                                         <!--end of modal body-->
+                                         <div class="modal-footer">
+                                            <button class="btn btn-success"
+                                                    type="button">
+                                                    Yes
+                                            </button>
+                                            <button class="btn btn-danger"
+                                                    type="button">
+                                                    No
+                                            </button>
+                                         </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end of modal-->
+                        </div>
+                        </div>                        
+                        <div>
+                            <p class="fw-bold text-dark">By creating an account, you agree to of FEU Cavite <a href="terms_page.html" style="color: black;">Terms of Use</a> 
+                                and <a href="privacy_page.html" style="color: black;">Privacy Policy.</a></p>
+                        </div>
+                        <center>
+                        <div class="text-center text-lg-center mt-4 mb-5 pt-2 ">
+                            <p class="small fw-bold mt-2 pt-1 mb-0 text-dark">Already have an account? 
+                                <a href="login_page.html" style="color: #005c40 ">Log in</a></p>
+                        </div>
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!--end of sign up page-->
+
+
+      <!--Start of footer-->
+
+      <div class="footer">
+        <div id="button"></div>
+      <div id="container">
+      <div id="cont">
+      <div class="footer_center">
+             <h3>Contact Us!</h3>
+      </div>
+      </div>
+      </div>
+      </div>
+    <!--End of footer-->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+</html>

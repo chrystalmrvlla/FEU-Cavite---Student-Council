@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Council</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <style>
+        .pagination {
+            align-items: center;
+        }
+
+        #navbarSupportedContent {
+            font-size: medium;
+        }
+
+        .navbar {
+            min-height: 60px;
+            height: 60px;
+        }
+
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400);
+
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 300;
+            background-color: lightblue;
+            color: #FFF;
+        }
+
+        section {
+            text-align: center;
+        }
+
+        .student-council .representatives {
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            transition: all 0.4s;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+        }
+
+        .student-council .representatives:hover {
+            -webkit-box-shadow: 0 0 6px 5px #ddd;
+            box-shadow: 0 0 6px 5px #ddd;
+            border-radius: 6px;
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            transition: all 0.4s;
+            border: 1px solid #dee2e6;
+        }
+
+        .student-council .representatives .spk-img {
+            position: relative;
+        }
+
+        .student-council .representatives .spk-img:before {
+            background: rgba(251, 189, 17, 0.5);
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            -webkit-transform: scale(0);
+            -ms-transform: scale(0);
+            transform: scale(0);
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            transition: all 0.4s;
+            z-index: 5;
+        }
+
+        .student-council .representatives .spk-img:hover:before {
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .student-council .representatives .spk-img img {
+            width: 100%;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+        }
+
+        .student-council .representatives .spk-img ul {
+            position: absolute;
+            display: inline-block;
+            top: 35%;
+            left: 40%;
+            width: 100px;
+            line-height: 3;
+            opacity: 0;
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            transition: all 0.4s;
+        }
+
+        .student-council .representatives .spk-img ul:before {
+            position: absolute;
+            content: "";
+            height: 110px;
+            width: 110px;
+            background: transparent;
+            top: -15%;
+            left: -15px;
+            border: 1px solid #fff;
+            -webkit-transform: rotate(44deg) scale(1.4);
+            -ms-transform: rotate(44deg) scale(1.4);
+            transform: rotate(44deg) scale(1.4);
+            opacity: 0;
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            transition: all 0.4s;
+        }
+
+        .student-council .representatives .spk-img ul li {
+            display: inline-block;
+            margin: 0 3px;
+            -webkit-transform: perspective(50px) rotatey(80deg);
+            transform: perspective(50px) rotatey(80deg);
+            -webkit-transition: all 0.5s ease 0.2s;
+            -o-transition: all 0.5s ease 0.2s;
+            transition: all 0.5s ease 0.2s;
+            margin: 0 5px;
+        }
+
+        .student-council .representatives .spk-img ul li a i.fa {
+            color: rgba(255, 78, 0, 0.8);
+            font-size: 18px;
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            transition: all 0.4s;
+            width: 28px;
+            color: #fff;
+            height: 28px;
+            line-height: 21px;
+            text-align: center;
+        }
+
+        .student-council .representatives .spk-img ul li a i.fa:hover {
+            color: #cf057c;
+        }
+
+        .student-council .representatives .spk-img ul li:nth-child(1) {
+            -webkit-transform: translate3d(-53px, -50px, 0);
+            transform: translate3d(-53px, -50px, 0);
+        }
+
+        .student-council .representatives .spk-img ul li:nth-child(2) {
+            -webkit-transform: translate3d(53px, -50px, 0);
+            transform: translate3d(53px, -50px, 0);
+        }
+
+        .student-council .representatives .spk-img ul li:nth-child(3) {
+            -webkit-transform: translate3d(-53px, 50px, 0);
+            transform: translate3d(-53px, 50px, 0);
+        }
+
+        .student-council .representatives .spk-img ul li:nth-child(4) {
+            -webkit-transform: translate3d(53px, 50px, 0);
+            transform: translate3d(53px, 50px, 0);
+        }
+
+        .student-council .representatives .spk-img:hover ul {
+            left: 35%;
+            opacity: 1;
+            z-index: 9;
+        }
+
+        .student-council .representatives .spk-img:hover ul:before {
+            opacity: 1;
+            -webkit-transform: rotate(44deg) scale(1);
+            -ms-transform: rotate(44deg) scale(1);
+            transform: rotate(44deg) scale(1);
+        }
+
+        .student-council .representatives .spk-img:hover ul li:nth-child(1),
+        .student-council .representatives .spk-img:hover ul li:nth-child(2),
+        .student-council .representatives .spk-img:hover ul li:nth-child(3),
+        .student-council .representatives .spk-img:hover ul li:nth-child(4) {
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        .student-council .representatives .spk-info {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .student-council .representatives .spk-info h3 {
+            color: #252525;
+            font-size: 20px;
+            line-height: 20px;
+            margin-bottom: 5px;
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            transition: all 0.4s;
+            text-transform: capitalize;
+        }
+
+        .student-council .representatives .spk-info h3:hover {
+            color: #FBBD11;
+        }
+
+        .student-council .representatives .spk-info p {
+            font-size: 15px;
+            margin-bottom: 0;
+            color: #656565;
+        }
+
+        .student-council-two .title-text h2 {
+            color: #fff;
+        }
+
+        .student-council-two .representatives {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .student-council-two .representatives:hover img {
+            -webkit-transform: translate3d(0px, 0px, 0px);
+            transform: translate3d(0px, 0px, 0px);
+        }
+
+        .student-council-two .representatives img {
+            position: relative;
+            -webkit-transform: translate3d(0px, 0px, 0px);
+            transform: translate3d(0px, 0px, 0px);
+            -webkit-transition: all 0.3s linear 0s;
+            -o-transition: all 0.3s linear 0s;
+            transition: all 0.3s linear 0s;
+        }
+
+        .student-council-two .representatives .img-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            background: #FBBD11;
+            -webkit-transition: all 0.3s ease 0s;
+            -o-transition: all 0.3s ease 0s;
+            transition: all 0.3s ease 0s;
+        }
+
+        .student-council-two .representatives:hover .img-overlay {
+            opacity: 1;
+        }
+
+        .student-council-two .representatives .name a {
+            position: absolute;
+            bottom: -20%;
+            left: 10%;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 600;
+            text-transform: capitalize;
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            transition: all 0.4s;
+        }
+
+        .student-council-two .representatives .name a:hover {
+            color: #cf057c;
+        }
+
+        .student-council-two .representatives:hover .name a {
+            bottom: 10%;
+        }
+
+        .student-council-two .representatives .social-icons {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            position: absolute;
+            bottom: 23%;
+            left: 0;
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            transition: all 0.4s;
+        }
+
+        .student-council-two .representatives .social-icons li {
+            margin-right: 10px;
+        }
+
+        .student-council-two .representatives .social-icons li a {
+            color: #fff;
+        }
+
+        .student-council-two .representatives .social-icons li a:hover {
+            color: #252525;
+        }
+
+        .student-council-two .representatives:hover .social-icons {
+            left: 27px;
+        }
+
+        ul {
+            list-style: outside none none;
+            margin: 0;
+            padding: 0;
+            outline: none;
+        }
+
+        .mb50 {
+            margin-bottom: 50px;
+        }
+
+        .footer #button {
+            width: 35px;
+            height: 35px;
+            border: #727172 12px solid;
+            border-radius: 35px;
+            margin: 0 auto;
+            position: relative;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        .footer #button:hover {
+            width: 35px;
+            height: 35px;
+            border: #3A3A3A 12px solid;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            transition: all 1s ease;
+            position: relative;
+        }
+
+        .footer {
+            bottom: 0;
+            left: 0;
+            position: fixed;
+            width: 100%;
+            height: 2em;
+            overflow: hidden;
+            margin: 0 auto;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            transition: all 1s ease;
+            z-index: 999;
+        }
+
+        .footer:hover {
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            transition: all 1s ease;
+            height: 11em;
+        }
+
+        .footer #container {
+            margin-top: 5px;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            top: 0;
+            left: 0;
+            background: #048249;
+        }
+
+        .footer #cont {
+            position: relative;
+            top: -45px;
+            right: 190px;
+            width: 150px;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .footer_center {
+            width: 500px;
+            float: left;
+            text-align: center;
+        }
+
+        .footer h3 {
+            font-family: 'Helvetica';
+            font-size: 30px;
+            font-weight: 100;
+            margin-top: 70px;
+            margin-left: 40px;
+        }
+    </style>
+</head>
+<!-- 100px to 75ph-->
+
+<body class="bg-light">
+<!--start of navbar-->
+<nav class="navbar navbar-expand-lg bg-success">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light" href="index.html">
+        <img src="logo.png" width="30px" height="50px">
+        FEU Student Council
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="representative.html">Representatives</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="calendar_of_events.html">Calendar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="upload_download.html">Upload/Download</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+        <div class="ms-2">
+          <a href="login_page.html"><button type="submit" class="btn btn-outline-warning">Login</button></a>
+      </div>
+      </div>
+    </div>
+  </nav>
+<!--end of navbar-->
+    <br><br><br><br>
+
+    <!--start of representatives-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <div class="student-council representatives pad100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title text-center">
+                        <div class="title-text mb50">
+                            <h2 class="text-dark"> The FEU Cavite Student Council</h2>
+                        </div>
+                    </div>
+                </div>
+                <!-- /col end-->
+            </div>
+            <!-- /.row  end-->
+            <div class="row mb50">
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                    <div class="representatives xs-mb30">
+                        <div class="spk-img">
+                            <img class="img-fluid" src="President.png" alt="trainer-img" />
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-camera"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/Sctr.AndreLerma"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-life-ring"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="spk-info">
+                            <h3>Prince Marcus Andre Lerma</h3>
+                            <p>President</p>
+                            <center>
+                                <a href="president_info.html">
+                                <button class="btn btn-success"> Know more about me!
+                                </button>
+                                </a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <!-- /col end-->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                    <div class="representatives xs-mb30">
+                        <div class="spk-img">
+                            <img class="img-fluid" src="VP-Internal.png" alt="trainer-img" />
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-camera"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/profile.php?id=100084254805819"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-life-ring"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="spk-info">
+                            <h3>Althea Torres</h3>
+                            <p>VP-Internal</p>
+                            <center>
+                                <a href="vp_internal_info.html">
+                                <button class="btn btn-success"> Know more about me!
+                                </button>
+                                </a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <!-- /col end-->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                    <div class="representatives xs-mb30">
+                        <div class="spk-img">
+                            <img class="img-fluid" src="VP-External.png" alt="trainer-img" />
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-camera"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/mackenzie.longno.92"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-life-ring"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="spk-info">
+                            <h3>Mackenzie Longno</h3>
+                            <p>VP-External</p>
+                            <center>
+                                <a href="vp_external_info.html">
+                                <button class="btn btn-success"> Know more about me!
+                                </button>
+                                </a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <!-- /col end-->
+                <div class="col-xl-3 col-lg-3 d-md-none d-lg-block col-sm-12">
+                    <div class="representatives">
+                        <div class="spk-img">
+                            <img class="img-fluid" src="Secretary.png" alt="trainer-img" />
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-camera"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/rances.72"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-life-ring"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="spk-info">
+                            <h3>Francine Pampliega</h3>
+                            <p>Secretary</p>
+                            <center>
+                                <a href="secretary_info.html">
+                                <button class="btn btn-success"> Know more about me!
+                                </button>
+                                </a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <!-- /col end-->
+            </div>
+            <!-- /row end-->
+            <div class="row">
+                <div class="offset-2 no-gutter"></div>
+                <!-- /col end-->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                    <div class="representatives xs-mb30">
+                        <div class="spk-img">
+                            <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="trainer-img" />
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-camera"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-life-ring"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="spk-info">
+                            <h3>Monica Rachelle Arcala</h3>
+                            <p>Treasurer</p>
+                            <center>
+                                <a href="treasurer_info.html">
+                                <button class="btn btn-success"> Know more about me!
+                                </button>
+                                </a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <!-- /col end-->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                    <div class="representatives xs-mb30">
+                        <div class="spk-img">
+                            <img class="img-fluid" src="Auditor.png" />
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-camera"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/kaylavicente31"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-life-ring"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="spk-info">
+                            <h3>Jena Nina Vicente</h3>
+                            <p>Auditor</p>
+                            <center>
+                                <a href="auditor_info.html">
+                                <button class="btn btn-success"> Know more about me!
+                                </button>
+                                </a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <!-- /col end-->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                    <div class="representatives">
+                        <div class="spk-img">
+                            <img class="img-fluid" src="P.R.O.png" alt="trainer-img" />
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-camera"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/aileen.mantele.7"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-life-ring"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="spk-info">
+                            <h3>Aileen Mantele</h3>
+                            <p>P.R.O</p>
+                            <center>
+                                <a href="pro_info.html">
+                                <button class="btn btn-success"> Know more about me!
+                                </button>
+                                </a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <!-- /col end-->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
+                    <div class="representatives">
+                        <div class="spk-img">
+                            <img class="img-fluid" src="Business Manager.png" alt="trainer-img" />
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-camera"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/nicklaus.feraer"><i class="fa fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-life-ring"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="spk-info">
+                            <h3>Nicklaus James Feraer</h3>
+                            <p>Business Manager</p>
+                            <center>
+                                <a href="business_manager_info.html">
+                                <button class="btn btn-success"> Know more about me!
+                                </button>
+                                </a>
+                                </center>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /row end-->
+        </div>
+        <!-- /container end-->
+    </div>
+<!--End of Representatives-->
+
+<br><br><br><br><br><br><br><br>
+    <!--Start of footer-->
+    <div class="footer">
+        <div id="button"></div>
+        <div id="container">
+            <div id="cont">
+                <div class="footer_center">
+                    <h3>Contact Us!</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End of footer-->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+
+</html>
